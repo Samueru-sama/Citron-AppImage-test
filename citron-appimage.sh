@@ -27,9 +27,14 @@ UPINFO="gh-releases-zsync|$(echo "$GITHUB_REPOSITORY" | tr '/' '|')|latest|*$ARC
 
 # BUILD CITRON, fallback to mirror if upstream repo fails to clone
 if ! git clone 'https://git.citron-emu.org/Citron/Citron.git' ./citron; then
+	if [ "$DEVEL" = 'true' ]; then
+		echo "Bailing out because upstream repo cannot be cloned and mirror does not have latest commit"
+		exit 1
+	fi
 	echo "Using mirror instead..."
 	rm -rf ./citron || true
 	git clone 'https://github.com/pkgforge-community/git.citron-emu.org-Citron-Citron.git' ./citron
+	MIRROR=true
 fi
 
 (
@@ -38,10 +43,14 @@ fi
 		CITRON_TAG="$(git rev-parse --short HEAD)"
 		echo "Making nightly \"$CITRON_TAG\" build"
 		VERSION="$CITRON_TAG"
-	else
+	elif [ "$MIRROR" != 'true' ]; then
 		CITRON_TAG=$(git describe --tags)
 		echo "Making stable \"$CITRON_TAG\" build"
 		git checkout "$CITRON_TAG"
+		VERSION="$(echo "$CITRON_TAG" | awk -F'-' '{print $1}')"
+	else
+		CITRON_TAG=$(cat ./.github/LATEST_TAG.txt)
+		echo "Making stable \"$CITRON_TAG\" build from mirror"
 		VERSION="$(echo "$CITRON_TAG" | awk -F'-' '{print $1}')"
 	fi
 	git submodule update --init --recursive -j$(nproc)

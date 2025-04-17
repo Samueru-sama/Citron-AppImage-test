@@ -52,7 +52,7 @@ fi
 	mkdir build
 	cd build
 	cmake .. -GNinja \
-		-DCITRON_ENABLE_OPENGL=OFF \
+		-DENABLE_OPENGL=OFF \
 		-DCITRON_USE_BUNDLED_VCPKG=OFF \
 		-DCITRON_USE_BUNDLED_QT=OFF \
 		-DUSE_SYSTEM_QT=ON \

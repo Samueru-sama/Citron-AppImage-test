@@ -94,6 +94,13 @@ if [ "$DEVEL" = 'true' ]; then
 	UPINFO="$(echo "$UPINFO" | sed 's|latest|nightly|')"
 fi
 
+# Remove intel_hasvk vulkan from the v3 appimage, might remove it all together in the future
+# Note intel gpu support is still provided by libvulkan_intel.so for newer intel gpus and igpus
+if [ "$1" = 'v3' ]; then
+	rm -f /usr/lib/libvulkan_intel_hasvk.so \
+		/usr/share/vulkan/icd.d/intel_hasvk_icd*	
+fi
+
 # Bundle all libs
 wget --retry-connrefused --tries=30 "$LIB4BN" -O ./lib4bin
 chmod +x ./lib4bin

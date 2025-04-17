@@ -52,6 +52,7 @@ fi
 	mkdir build
 	cd build
 	cmake .. -GNinja \
+		-DCITRON_ENABLE_OPENGL=OFF \
 		-DCITRON_USE_BUNDLED_VCPKG=OFF \
 		-DCITRON_USE_BUNDLED_QT=OFF \
 		-DUSE_SYSTEM_QT=ON \
@@ -99,10 +100,6 @@ wget --retry-connrefused --tries=30 "$LIB4BN" -O ./lib4bin
 chmod +x ./lib4bin
 xvfb-run -a -- ./lib4bin -p -v -e -s -k \
 	/usr/bin/citron* \
-	/usr/lib/libGLX* \
-	/usr/lib/libGL.so* \
-	/usr/lib/libEGL* \
-	/usr/lib/dri/* \
 	/usr/lib/vdpau/* \
 	/usr/lib/libvulkan* \
 	/usr/lib/libXss.so* \

@@ -87,11 +87,11 @@ git clone --recursive "https://git.citron-emu.org/citron/emulator.git" ./citron 
 		-DCMAKE_BUILD_TYPE=Release             \
 		-DCMAKE_INSTALL_PREFIX=/usr            \
 		-DUSE_SYSTEM_QT=ON                     \
-		-DCITRON_USE_BUNDLED_VCPKG=OFF         \
-		-DCITRON_USE_BUNDLED_FFMPEG=OFF        \
-		-DCITRON_USE_BUNDLED_SDL2=OFF          \
+		-DCITRON_USE_BUNDLED_VCPKG=ON          \
+		-DCITRON_USE_BUNDLED_FFMPEG=ON         \
+		-DCITRON_USE_BUNDLED_SDL2=ON           \
 		-DCITRON_USE_EXTERNAL_SDL2=OFF         \
-		-DCITRON_CHECK_SUBMODULES=OFF          \
+		-DCITRON_CHECK_SUBMODULES=ON           \
 		-DCITRON_ENABLE_LTO=ON                 \
 		-DCITRON_TESTS=OFF                     \
 		-DENABLE_QT_TRANSLATION=ON             \

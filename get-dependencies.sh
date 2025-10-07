@@ -20,6 +20,7 @@ pacman -Syu --noconfirm \
 	libxss              \
 	mbedtls2            \
 	mesa                \
+	nasm                \
 	ninja               \
 	nlohmann-json       \
 	openal              \
